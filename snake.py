@@ -13,7 +13,7 @@ def inicio():
 
 
 def desenha(pos, tamanho):
-    pygame.draw.rect(tela, (255,0,0), (pos[0], pos[1],tamanho, tamanho))
+    pygame.draw.rect(tela, (255, 0, 0), (pos[0], pos[1], tamanho, tamanho))
     pygame.display.flip()
 
 
@@ -23,20 +23,28 @@ def principal():
     x, y = 100, 100
     contador = 0
     velocidade = 10
+    vx = vy = 0
     while True:
         contador += 1
         pygame.event.pump()
         teclas = pygame.key.get_pressed()
         if teclas[K_UP]:
-            y -= velocidade
+            vy = -velocidade
+            vx = 0
         if teclas[K_DOWN]:
-            y += velocidade
+            vy = velocidade
+            vx = 0
         if teclas[K_LEFT]:
-            x -= velocidade
+            vx = -velocidade
+            vy = 0
         if teclas[K_RIGHT]:
-            x += velocidade
+            vx = velocidade
+            vy = 0
         if teclas[K_ESCAPE]:
             break
+
+        x = x + vx
+        y = y + vy
 
         if x < 0 or x > TAMANHO_TELA[0] or y < 0 or y > TAMANHO_TELA[1]:
             print("Você morreu por que saiu da tela")
