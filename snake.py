@@ -20,13 +20,24 @@ def principal():
     tamanho = 50
     x, y = 100, 100
     contador = 0
+    velocidade = 10
     while True:
-        desenha((x,y), tamanho)
-        pygame.time.delay(30)
-        if contador >= 100:
-            break
         contador += 1
+        pygame.event.pump()
+        teclas = pygame.key.get_pressed()
+        if teclas[K_UP]:
+            y -= velocidade
+        if teclas[K_DOWN]:
+            y += velocidade
+        if teclas[K_LEFT]:
+            x -= velocidade
+        if teclas[K_RIGHT]:
+            x += velocidade
+        if teclas[K_ESCAPE]:
+            break
 
+        desenha((x, y), tamanho)
+        pygame.time.delay(30)
 def fim():
     pygame.quit()
 
