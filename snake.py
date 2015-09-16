@@ -24,12 +24,11 @@ def principal():
     tamanho = 20
     x, y = 100, 100
     contador = 0
-    velocidade = 20
+    velocidade = 10
     vx = vy = 0
-    ox = oy = 0
-    x1 = y1 = 0
-    x2 = y2 = 0
-    x3 = y3 = 0
+    fator_de_tamanho = tamanho / velocidade
+    comprimento = 8 * fator_de_tamanho
+    posicoes = [(0,0) ] * comprimento
     while True:
         contador += 1
         pygame.event.pump()
@@ -49,20 +48,18 @@ def principal():
         if teclas[K_ESCAPE]:
             break
 
-        ox = x3; oy = y3
-        x3 = x2; y3 = y2
-        x2 = x1; y2 = y1
-        x1 = x; y1 = y
+        posicoes.pop(0)
 
         x = x + vx
         y = y + vy
+        posicoes.append((x, y))
 
         if x < 0 or x > TAMANHO_TELA[0] or y < 0 or y > TAMANHO_TELA[1]:
             print("Você morreu por que saiu da tela")
             break
 
-        desenha((ox, oy), tamanho, cor_fundo)
-        desenha((x, y), tamanho, cor_cobra)
+        desenha(posicoes[0], tamanho, cor_fundo)
+        desenha(posicoes[-1], tamanho, cor_cobra)
         pygame.time.delay(atraso)
 
 
