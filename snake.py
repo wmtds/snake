@@ -6,6 +6,7 @@ from pygame.locals import *
 
 TAMANHO_TELA = 640, 480
 
+
 def inicio():
     global tela
     tela = pygame.display.set_mode(TAMANHO_TELA)
@@ -14,6 +15,7 @@ def inicio():
 def desenha(pos, tamanho):
     pygame.draw.rect(tela, (255,0,0), (pos[0], pos[1],tamanho, tamanho))
     pygame.display.flip()
+
 
 def principal():
     atraso = 30
@@ -36,8 +38,14 @@ def principal():
         if teclas[K_ESCAPE]:
             break
 
+        if x < 0 or x > TAMANHO_TELA[0] or y < 0 or y > TAMANHO_TELA[1]:
+            print("Você morreu por que saiu da tela")
+            break
+
         desenha((x, y), tamanho)
-        pygame.time.delay(30)
+        pygame.time.delay(atraso)
+
+
 def fim():
     pygame.quit()
 
