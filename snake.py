@@ -19,13 +19,23 @@ def desenha(pos, tamanho, cor):
     pygame.display.flip()
 
 
+def verifica_se_bateu(pos, tamanho, cor_fundo):
+    x = pos[0] + tamanho / 2
+    y = pos[1] + tamanho / 2
+    cor_alvo = tela.get_at((x, y))
+    if cor_alvo[0:3] != cor_fundo:
+        return True
+    return False
+
+
 def principal():
     atraso = 30
     tamanho = 20
     x, y = 100, 100
     contador = 0
-    velocidade = 10
-    vx = vy = 0
+    velocidade = 12
+    vx = velocidade
+    vy = 0
     fator_de_tamanho = tamanho / velocidade
     comprimento = 8 * fator_de_tamanho
     posicoes = [(0, 0)]
@@ -59,6 +69,10 @@ def principal():
 
         if x < 0 or x > TAMANHO_TELA[0] or y < 0 or y > TAMANHO_TELA[1]:
             print("Você morreu por que saiu da tela")
+            break
+
+        if verifica_se_bateu(posicoes[-1], tamanho, cor_fundo):
+            print("Você bateu em alguma coisa")
             break
 
         desenha(posicoes[-1], tamanho, cor_cobra)
