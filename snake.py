@@ -55,7 +55,7 @@ def principal():
         if teclas[K_RIGHT]:
             vx = velocidade
             vy = 0
-        if teclas[K_SPACE]:
+        if teclas[K_SPACE] or contador % 50 == 0:
             comprimento += 1
         if teclas[K_ESCAPE]:
             break
@@ -77,6 +77,7 @@ def principal():
 
         desenha(posicoes[-1], tamanho, cor_cobra)
         pygame.time.delay(atraso)
+    print ("\nVocê sobreviveu por {} ciclos! Parabéns!".format(contador))
 
 
 def fim():
