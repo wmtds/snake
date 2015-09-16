@@ -6,14 +6,16 @@ from pygame.locals import *
 
 TAMANHO_TELA = 640, 480
 
+cor_cobra = (255, 0, 0)
+cor_fundo = (0, 0, 0)
 
 def inicio():
     global tela
     tela = pygame.display.set_mode(TAMANHO_TELA)
 
 
-def desenha(pos, tamanho):
-    pygame.draw.rect(tela, (255, 0, 0), (pos[0], pos[1], tamanho, tamanho))
+def desenha(pos, tamanho, cor):
+    pygame.draw.rect(tela, cor, (pos[0], pos[1], tamanho, tamanho))
     pygame.display.flip()
 
 
@@ -24,6 +26,7 @@ def principal():
     contador = 0
     velocidade = 10
     vx = vy = 0
+    ox = oy = 0
     while True:
         contador += 1
         pygame.event.pump()
@@ -43,6 +46,8 @@ def principal():
         if teclas[K_ESCAPE]:
             break
 
+        ox = x
+        oy = y
         x = x + vx
         y = y + vy
 
@@ -50,7 +55,8 @@ def principal():
             print("Você morreu por que saiu da tela")
             break
 
-        desenha((x, y), tamanho)
+        desenha((ox, oy), tamanho, cor_fundo)
+        desenha((x, y), tamanho, cor_cobra)
         pygame.time.delay(atraso)
 
 
