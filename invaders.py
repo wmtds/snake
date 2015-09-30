@@ -49,6 +49,8 @@ def principal():
             nave.x -= velocidade
         elif teclas[K_RIGHT]:
             nave.x += velocidade
+        if teclas[K_ESCAPE]:
+            break
         if teclas[K_SPACE] and len(tiros) <= MAX_TIROS:
             tiro = Nave(nave.x + TAMANHO//2, TAMANHO_TELA[1] - TAMANHO,
                         (255, 255,255), 12, 23)
